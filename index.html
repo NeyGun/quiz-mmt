@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Thi Mạng Máy Tính: Ngân Hàng Câu Hỏi Trắc Nghiệm Toàn Diện</title>
+    <style>
+        :root {
+            --primary: #1976d2;
+            --primary-hover: #1565c0;
+            --primary-light: #e3f2fd;
+            --success: #2e7d32;
+            --success-light: #e8f5e9;
+            --danger: #d32f2f;
+            --danger-light: #ffebee;
+            --warning: #ed6c02;
+            --warning-light: #fff3e0;
+            --neutral-dark: #263238;
+            --neutral-light: #f8fafc;
+            --border: #cfd8dc;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: var(--neutral-dark);
+            line-height: 1.6;
+            padding: 20px 15px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #0f172a;
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .global-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .badge-success {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .badge-danger {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .badge-neutral {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Controls Section */
+        .controls-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .controls-card label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .toolbar {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 15px;
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        .toggle-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            user-select: none;
+        }
+
+        .toggle-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .chapter-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: #334155;
+            border: none;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        /* Chapter Banner & Progress Bar */
+        .chapter-header {
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .chapter-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .chapter-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        .chapter-stats strong {
+            color: #fff;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #4ade80;
+            transition: width 0.3s ease;
+        }
+
+        /* Question Blocks */
+        .question-block {
+            margin-bottom: 22px;
+            padding: 22px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #94a3b8;
+            border-radius: 10px;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .question-block:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .question-block.state-correct {
+            border-left-color: var(--success);
+            background: #fafdfa;
+        }
+
+        .question-block.state-wrong {
+            border-left-color: var(--danger);
+            background: #fffdfd;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .question-num {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-status-pill {
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .question-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: #fff;
+            user-select: none;
+        }
+
+        .option-label:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .option-label input[type="radio"] {
+            margin-top: 4px;
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            font-size: 15px;
+            color: #334155;
+            flex-grow: 1;
+        }
+
+        /* Highlight states */
+        .option-label.ans-correct {
+            background-color: var(--success-light) !important;
+            border: 1px solid var(--success) !important;
+            border-left: 5px solid var(--success) !important;
+            color: var(--success) !important;
+            font-weight: 600;
+        }
+
+        .option-label.ans-wrong {
+            background-color: var(--danger-light) !important;
+            border: 1px solid var(--danger) !important;
+            border-left: 5px solid var(--danger) !important;
+            color: var(--danger) !important;
+            font-weight: 500;
+        }
+
+        .tag-badge {
+            margin-left: 8px;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .tag-correct {
+            background-color: #c8e6c9;
+            color: #1b5e20;
+        }
+
+        .tag-chosen {
+            background-color: #ffcdd2;
+            color: #b71c1c;
+        }
+
+        /* Question Actions */
+        .question-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .btn-check {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-check:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-show {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-show:hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .btn-reset-q {
+            background: transparent;
+            color: #64748b;
+            border: none;
+            padding: 8px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .btn-reset-q:hover {
+            color: #0f172a;
+        }
+
+        /* Result feedback box */
+        .result-box {
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            display: none;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .result-box.correct {
+            background-color: var(--success-light);
+            border: 1px solid #c8e6c9;
+            color: #1b5e20;
+        }
+
+        .result-box.incorrect {
+            background-color: var(--danger-light);
+            border: 1px solid #ffcdd2;
+            color: #b71c1c;
+        }
+
+        .result-box.warning {
+            background-color: var(--warning-light);
+            border: 1px solid #ffe0b2;
+            color: #b25e02;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Empty state */
+        .empty-placeholder {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .empty-placeholder svg {
+            width: 60px;
+            height: 60px;
+            fill: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 18px 14px;
+            }
+            h1 {
+                font-size: 21px;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>📚 Ngân Hàng Câu Hỏi Mạng Máy Tính (Hợp Nhất)</h1>
+        <div class="global-stats">
+            <span class="badge" id="badge-total-questions"></span>
+            <span class="badge badge-neutral">8 Chương / Chủ đề</span>
+            <span class="badge badge-success">✓ Hiện đáp án tức thì từng câu</span>
+            <span class="badge badge-neutral">✓ Đã lọc trùng & chuẩn hóa</span>
+        </div>
+    </header>
+
+    <div class="controls-card">
+        <label for="chapter-select"><strong>📖 Chọn Chương để Luyện tập:</strong></label>
+        <select id="chapter-select">
+            <option value="">-- Vui lòng chọn một chương --</option>
+            <option value="ALL">🌟 Tất cả các chương</option>
+        </select>
+
+        <div class="toolbar">
+            <label class="toggle-label" title="Khi bật: Chỉ cần nhấp vào đáp án là hệ thống kiểm tra và hiện đúng/sai ngay lập tức">
+                <input type="checkbox" id="auto-check-toggle" checked>
+                <span>⚡ Tự động hiện đáp án đúng ngay khi chọn</span>
+            </label>
+
+            <div class="chapter-actions">
+                <button type="button" class="btn-secondary" id="btn-show-all-answers" title="Hiện đáp án đúng của tất cả câu trong phần này">👁️ Hiện tất cả đáp án</button>
+                <button type="button" class="btn-secondary" id="btn-reset-chapter" title="Làm lại từ đầu phần này">🔄 Làm lại phần này</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Chapter Info -->
+    <div id="chapter-banner" class="chapter-header" style="display: none;">
+        <h2 id="chapter-title">Chương</h2>
+        <div class="chapter-stats">
+            <span>Tổng số: <strong id="chapter-total-q">0</strong> câu hỏi</span>
+            <span>Đã làm: <strong id="chapter-done-q">0</strong> câu</span>
+            <span>Đúng: <strong id="chapter-correct-q" style="color: #4ade80;">0</strong></span>
+            <span>Sai: <strong id="chapter-wrong-q" style="color: #f87171;">0</strong></span>
+            <span>Tỷ lệ đúng: <strong id="chapter-accuracy">0%</strong></span>
+        </div>
+        <div class="progress-bar-container">
+            <div id="progress-fill" class="progress-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- Quiz Content -->
+    <div id="quiz-container">
+        <div id="questions-list">
+            <div class="empty-placeholder">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+                <p>Vui lòng chọn một chương ở menu phía trên để bắt đầu luyện tập câu hỏi trắc nghiệm!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dữ liệu ngân hàng câu hỏi hợp nhất từ index.html và quiz.html
+    // Đã phân loại theo chương, chuẩn hóa đáp án và deduplicate
+    const quizData = {
+    "Chương 1: Tổng quan về mạng máy tính": [
+        { "q": "Mô hình phân lớp OSI có bao nhiêu lớp?", "options": ["4 lớp", "5 lớp", "7 lớp", "2 lớp"], "ans": 2 },
+        { "q": "Mô hình giao thức TCP/IP bao gồm bao nhiêu tầng?", "options": ["4 tầng", "5 tầng", "6 tầng", "7 tầng"], "ans": 0 },
+        { "q": "Đơn vị đo thông lượng (throughput) trong mạng máy tính là gì?", "options": ["Byte/s", "Bit/s", "Byte/phút", "Bit/phút"], "ans": 1 },
+        { "q": "Giao thức IP nằm ở tầng nào trong mô hình TCP/IP?", "options": ["Application (Ứng dụng)", "Transport (Giao vận)", "Internet (Mạng)", "Network Access (Truy cập mạng)"], "ans": 2 },
+        { "q": "Lệnh PING sử dụng giao thức nào để kiểm tra sự liên thông của các máy tính trong mạng?", "options": ["TCP", "UDP", "ICMP", "ARP"], "ans": 2 },
+        { "q": "Thứ tự đóng gói dữ liệu (Encapsulation) từ trên xuống dưới trong mô hình OSI là gì?", "options": ["Data -> Segment -> Packet -> Frame -> Bit", "Data -> Packet -> Segment -> Frame -> Bit", "Data -> Frame -> Packet -> Segment -> Bit", "Data -> Segment -> Frame -> Packet -> Bit"], "ans": 0 },
+        { "q": "Loại mạng nào kết nối các thiết bị trong phạm vi địa lý nhỏ như một tòa nhà hoặc trường học?", "options": ["WAN (Wide Area Network)", "MAN (Metropolitan Area Network)", "LAN (Local Area Network)", "PAN (Personal Area Network)"], "ans": 2 },
+        { "q": "Cáp xoắn đôi (Twisted Pair) sử dụng kỹ thuật xoắn các sợi dây đồng lại với nhau nhằm mục đích gì?", "options": ["Tăng độ bền vật lý cho cáp", "Giảm nhiễu điện từ (EMI) và nhiễu xuyên âm (Crosstalk)", "Giúp truyền tín hiệu ánh sáng tốt hơn", "Tăng khả năng dẫn điện"], "ans": 1 },
+        { "q": "Thời gian để một bit tín hiệu di chuyển từ máy gửi đến máy nhận trên môi trường truyền dẫn gọi là gì?", "options": ["Transmission delay (Trễ truyền tải)", "Propagation delay (Trễ lan truyền)", "Queuing delay (Trễ hàng đợi)", "Processing delay (Trễ xử lý)"], "ans": 1 },
+        { "q": "Trong các môi trường truyền dẫn sau, loại nào sử dụng các xung ánh sáng (light pulses) để truyền dữ liệu?", "options": ["Cáp xoắn đôi (UTP)", "Cáp đồng trục (Coaxial)", "Cáp quang (Fiber-optic)", "Sóng vô tuyến (Radio waves)"], "ans": 2 },
+        { "q": "Mạng chuyển mạch gói (Packet Switching) có ưu điểm gì so với mạng chuyển mạch kênh (Circuit Switching)?", "options": ["Cung cấp băng thông cố định cho mỗi kết nối", "Chia sẻ tài nguyên mạng hiệu quả hơn, hỗ trợ nhiều người dùng hơn", "Đảm bảo độ trễ thấp nhất cho các cuộc gọi thoại", "Thiết lập kết nối trước khi truyền dữ liệu"], "ans": 1 },
+        { "q": "Thuật ngữ 'Băng thông' (Bandwidth) trong mạng máy tính có nghĩa là gì?", "options": ["Lượng dữ liệu thực tế nhận được", "Tốc độ xử lý của CPU máy chủ", "Lượng dữ liệu tối đa có thể truyền qua môi trường trong một đơn vị thời gian", "Độ trễ của mạng"], "ans": 2 },
+        { "q": "Kiến trúc mạng nào mà các máy tính vừa có thể làm máy khách (client) vừa làm máy chủ (server)?", "options": ["Client/Server", "Peer-to-Peer (P2P)", "Terminal/Mainframe", "Centralized"], "ans": 1 },
+        { "q": "Đơn vị dữ liệu giao thức (PDU) tại Tầng Vật lý (Physical Layer) được gọi là gì?", "options": ["Frame", "Packet", "Segment", "Bit"], "ans": 3 },
+        { "q": "Thiết bị nào hoạt động ở tầng Physical (Tầng 1) có chức năng khuếch đại và làm mới tín hiệu?", "options": ["Hub / Repeater", "Switch", "Router", "Bridge"], "ans": 0 },
+        { "q": "Cấu trúc liên kết mạng (Topology) nào mà tất cả các trạm chia sẻ chung một đường truyền chính?", "options": ["Star topology", "Ring topology", "Mesh topology", "Bus topology"], "ans": 3 },
+        { "q": "Thuật ngữ 'Goodput' khác 'Throughput' ở điểm nào?", "options": ["Không có sự khác biệt", "Throughput đo dữ liệu lớp vật lý, Goodput đo dữ liệu lớp mạng", "Goodput là lượng dữ liệu hữu ích thực tế nhận được ở tầng ứng dụng, loại bỏ header và truyền lại", "Goodput luôn lớn hơn Throughput"], "ans": 2 },
+        { "q": "Để kiểm tra xem đường truyền từ máy tính của mình đến đích đi qua những router nào, ta dùng lệnh gì trên Windows?", "options": ["ping", "ipconfig", "tracert", "netstat"], "ans": 2 },
+        { "q": "Sự hội tụ mạng (Network Convergence) là gì?", "options": ["Quá trình máy tính tải dữ liệu", "Việc kết hợp nhiều loại dịch vụ truyền thông (thoại, video, dữ liệu) trên cùng một mạng vật lý duy nhất", "Việc phân chia mạng LAN thành các VLAN", "Quá trình đóng gói dữ liệu"], "ans": 1 },
+        { "q": "Lớp nào trong mô hình OSI chịu trách nhiệm chuyển đổi cú pháp dữ liệu (mã hóa, nén dữ liệu)?", "options": ["Application", "Presentation", "Session", "Transport"], "ans": 1 },
+        { "q": "Thiết bị đầu cuối (End system/Host) thường nằm ở đâu trong kiến trúc mạng Internet?", "options": ["Network core (Lõi mạng)", "Network edge (Biên mạng)", "Bên trong các Router", "Bên trong các Switch"], "ans": 1 },
+        { "q": "Lớp nào trong OSI quản lý, thiết lập và kết thúc các phiên liên lạc giữa các ứng dụng?", "options": ["Transport", "Session", "Presentation", "Application"], "ans": 1 },
+        { "q": "Kích thước tối đa cho phép của một đoạn mạng Ethernet 10Base-T hoặc 100Base-TX dùng cáp UTP là bao nhiêu mét?", "options": ["50 mét", "100 mét", "185 mét", "500 mét"], "ans": 1 },
+        { "q": "Một mạng LAN bao gồm 10 máy tính kết nối vào 1 Hub. Hỏi mạng này có bao nhiêu Collision Domain (Vùng đụng độ)?", "options": ["1", "5", "10", "11"], "ans": 0 },
+        { "q": "Trong cáp xoắn đôi (UTP), tại sao người ta lại xoắn các cặp dây với mật độ khác nhau?", "options": ["Để dễ phân biệt màu sắc", "Để cáp mềm dẻo hơn", "Để chống nhiễu chéo (crosstalk) giữa các cặp dây với nhau", "Để tăng cường khả năng chịu lực kéo"], "ans": 2 }
+    ],
+    
+    "Chương 2: Tầng Ứng dụng (Application Layer)": [
+        { "q": "Dịch vụ mạng DNS (Domain Name System) dùng để làm gì?", "options": ["Cấp phát địa chỉ IP động", "Truyền tệp tin giữa Client và Server", "Phân giải tên miền (Domain name) sang địa chỉ IP và ngược lại", "Định tuyến các gói tin trên Internet"], "ans": 2 },
+        { "q": "Trong giao thức HTTP, khi Web Server trả về một Response Message báo hiệu thành công, mã trạng thái (status code) thuộc nhóm nào?", "options": ["200-299", "300-399", "400-499", "500-599"], "ans": 0 },
+        { "q": "Giao thức FTP (File Transfer Protocol) sử dụng các port (cổng) mặc định nào?", "options": ["Port 20 và 21", "Port 25 và 110", "Port 80 và 443", "Port 53 và 67"], "ans": 0 },
+        { "q": "Giao thức nào sau đây được các Mail Server sử dụng để chuyển tiếp thư điện tử (email) cho nhau?", "options": ["POP3", "IMAP", "SMTP", "HTTP"], "ans": 2 },
+        { "q": "Trong hệ thống DNS, loại bản ghi (Resource Record) nào dùng để ánh xạ tên miền (hostname) sang địa chỉ IPv4?", "options": ["Bản ghi NS", "Bản ghi A", "Bản ghi MX", "Bản ghi CNAME"], "ans": 1 },
+        { "q": "Ưu điểm của giao thức IMAP so với POP3 khi đọc email là gì?", "options": ["Nhanh hơn do không cần xác thực", "Người dùng có thể quản lý thư theo thư mục và trạng thái thư được lưu giữ đồng bộ trên máy chủ", "Tải thư về máy cục bộ và xóa ngay trên máy chủ để tiết kiệm dung lượng", "Không yêu cầu kết nối Internet"], "ans": 1 },
+        { "q": "Trong kiến trúc Client-Server, đặc điểm nào sau đây KHÔNG đúng với Server?", "options": ["Luôn luôn hoạt động (always-on)", "Thường có địa chỉ IP cố định", "Thường xuyên thay đổi địa chỉ IP", "Có thể là một cụm máy chủ (data center) để mở rộng khả năng phục vụ"], "ans": 2 },
+        { "q": "Giao thức HTTP hoạt động ở tầng (layer) nào trong mô hình TCP/IP?", "options": ["Application Layer", "Transport Layer", "Internet Layer", "Network Access Layer"], "ans": 0 },
+        { "q": "Ứng dụng nào sau đây KHÔNG hoạt động theo mô hình Peer-to-Peer (P2P)?", "options": ["BitTorrent", "Skype (phiên bản cũ)", "Giao thức chia sẻ tệp eMule", "Dịch vụ Web (HTTP)"], "ans": 3 },
+        { "q": "Cặp giao thức và cổng dịch vụ nào sau đây KHÔNG đúng?", "options": ["SMTP: TCP Port 25", "HTTP: TCP Port 80", "DNS: UDP Port 53", "FTP: UDP Port 21"], "ans": 3 },
+        { "q": "Trong giao thức HTTP 1.1, kết nối liên tục (persistent connection) có nghĩa là gì?", "options": ["Nhiều đối tượng (ảnh, html) có thể được truyền trên cùng một kết nối TCP duy nhất", "Mỗi đối tượng phải được truyền trên một kết nối TCP riêng biệt", "Kết nối không bao giờ bị đóng", "Chỉ truyền dữ liệu khi máy chủ cho phép"], "ans": 0 },
+        { "q": "Mã trạng thái HTTP 404 mang ý nghĩa gì?", "options": ["Bad Request", "Unauthorized", "Not Found (Không tìm thấy tài nguyên)", "Internal Server Error"], "ans": 2 },
+        { "q": "Bản ghi MX (Mail eXchange) trong DNS dùng để làm gì?", "options": ["Chỉ định địa chỉ IP của Web Server", "Chỉ định máy chủ chịu trách nhiệm nhận email cho một tên miền", "Ánh xạ một bí danh (alias) tới tên miền thực", "Phân giải IPv6"], "ans": 1 },
+        { "q": "Lệnh nslookup được sử dụng để làm gì?", "options": ["Kiểm tra xem một máy tính có hoạt động không", "Xác định đường đi của gói tin", "Truy vấn thông tin từ máy chủ DNS", "Kiểm tra cấu hình IP cục bộ"], "ans": 2 },
+        { "q": "Cookies trong HTTP thường ĐƯỢC sử dụng để làm gì?", "options": ["Mã hóa mật khẩu người dùng", "Chứa nội dung video của trang web", "Lưu trạng thái phiên làm việc và giỏ hàng của người dùng", "Chặn quảng cáo độc hại"], "ans": 2 },
+        { "q": "Giao thức Telnet sử dụng cổng dịch vụ mặc định nào?", "options": ["Port 22", "Port 23", "Port 25", "Port 110"], "ans": 1 },
+        { "q": "Socket là sự kết hợp của những thành phần nào để xác định duy nhất một tiến trình (process) trên mạng?", "options": ["Địa chỉ MAC và Port", "Địa chỉ IP và Port", "Địa chỉ IP và Subnet Mask", "Giao thức và Port"], "ans": 1 },
+        { "q": "Kiến trúc mạng P2P (Peer-to-Peer) có đặc điểm nổi bật nào?", "options": ["Dễ quản lý tập trung", "Yêu cầu máy chủ có cấu hình rất mạnh", "Tính khả mở cao (tự mở rộng), các thiết bị vừa là client vừa là server", "Bảo mật tuyệt đối"], "ans": 2 },
+        { "q": "Trong cấu trúc của một bản ghi DNS (Name, Value, Type, TTL), TTL (Time to Live) có ý nghĩa gì?", "options": ["Thời gian gói tin tồn tại trên mạng trước khi bị xóa", "Thời gian bản ghi được phép lưu trong bộ nhớ cache (bộ đệm) của máy chủ DNS cục bộ", "Khoảng thời gian phản hồi của máy chủ DNS", "Độ trễ khi phân giải tên miền"], "ans": 1 },
+        { "q": "Truy vấn DNS lặp (Iterative Query) có đặc điểm gì?", "options": ["Máy chủ DNS cục bộ tự mình liên hệ tuần tự với Root, TLD và Authoritative server để tìm kết quả", "Máy chủ DNS cục bộ giao toàn bộ việc tìm kiếm cho Root server", "Máy chủ DNS không có cache", "Chỉ sử dụng giao thức TCP"], "ans": 0 },
+        { "q": "Một Web Server thường sử dụng cổng TCP (Port) nào cho kết nối bảo mật HTTPS?", "options": ["Port 80", "Port 21", "Port 443", "Port 25"], "ans": 2 },
+        { "q": "Với mô hình phân phối nội dung, HTTP/2 cải thiện điều gì so với HTTP/1.1?", "options": ["Thay thế TCP bằng UDP", "Sử dụng mã hóa phần cứng", "Giải quyết vấn đề Head-of-Line (HOL) blocking bằng cách chia luồng dữ liệu thành các khung nhỏ xen kẽ", "Không sử dụng Cookies"], "ans": 2 },
+        { "q": "Chương trình người dùng tương tác với hệ thống Email (để đọc và soạn thư) được gọi là gì?", "options": ["Mail Server", "Mail Transfer Agent (MTA)", "User Agent (UA)", "DNS Resolver"], "ans": 2 },
+        { "q": "Để xây dựng một ứng dụng Client-Server bằng ngôn ngữ lập trình, người ta sử dụng API (Giao diện lập trình ứng dụng) nào?", "options": ["Winsock / Sockets", "OpenGL", "DirectX", "JDBC"], "ans": 0 },
+        { "q": "Khi một máy trạm muốn gửi thư, nó sử dụng giao thức nào để đẩy (push) thư lên Mail Server của mình?", "options": ["POP3", "IMAP", "HTTP", "SMTP"], "ans": 3 }
+    ],
+
+    "Chương 3: Tầng Giao vận (Transport Layer)": [
+        { "q": "Giao thức TCP (Transmission Control Protocol) có đặc điểm nào sau đây?", "options": ["Không hướng kết nối (Connectionless)", "Hướng kết nối (Connection-oriented) và truyền tải tin cậy", "Truyền dữ liệu theo dạng Datagram", "Không kiểm soát tắc nghẽn"], "ans": 1 },
+        { "q": "Chức năng Ghép kênh (Multiplexing) và Tách kênh (Demultiplexing) ở tầng Giao vận dựa vào thông tin nào?", "options": ["Địa chỉ MAC nguồn và MAC đích", "Địa chỉ IP nguồn và IP đích", "Chỉ số Cổng (Port number) nguồn và đích", "Số thứ tự Sequence Number"], "ans": 2 },
+        { "q": "Trong quá trình thiết lập kết nối TCP (3-way handshake), cờ (flag) nào được sử dụng?", "options": ["SYN và ACK", "FIN và ACK", "URG và PSH", "RST và FIN"], "ans": 0 },
+        { "q": "Trường Checksum trong header của UDP có tác dụng gì?", "options": ["Xác định số thứ tự của gói tin", "Phát hiện lỗi (bit bị thay đổi) trong quá trình truyền tải", "Điều khiển luồng dữ liệu", "Phân mảnh gói tin"], "ans": 1 },
+        { "q": "Đơn vị dữ liệu (PDU) tại Tầng Giao vận của TCP được gọi là gì?", "options": ["Frame", "Packet", "Segment", "Bit"], "ans": 2 },
+        { "q": "Nếu ứng dụng yêu cầu truyền dữ liệu theo thời gian thực (như gọi thoại, stream video) và chấp nhận mất mát một phần dữ liệu, giao thức nào là phù hợp nhất?", "options": ["TCP", "UDP", "HTTP", "SMTP"], "ans": 1 },
+        { "q": "Giai đoạn 'Slow Start' trong cơ chế kiểm soát tắc nghẽn của TCP có nghĩa là gì?", "options": ["Cửa sổ tắc nghẽn (cwnd) bắt đầu ở mức thấp (1 MSS) và tăng theo cấp số nhân sau mỗi lần nhận ACK hợp lệ", "Cửa sổ tắc nghẽn giữ nguyên kích thước không đổi", "Cửa sổ tắc nghẽn tăng tuyến tính 1 MSS mỗi RTT", "Cửa sổ tắc nghẽn bị chia đôi ngay lập tức"], "ans": 0 },
+        { "q": "Kích thước Header tối thiểu của giao thức TCP là bao nhiêu byte?", "options": ["8 bytes", "20 bytes", "32 bytes", "40 bytes"], "ans": 1 },
+        { "q": "Kích thước Header của giao thức UDP là bao nhiêu byte?", "options": ["8 bytes", "16 bytes", "20 bytes", "32 bytes"], "ans": 0 },
+        { "q": "Trong gói tin TCP, trường 'Receive Window' (rwnd) được dùng để làm gì?", "options": ["Thông báo tốc độ của router", "Kiểm soát tắc nghẽn mạng", "Kiểm soát luồng (Flow Control) - thông báo không gian khả dụng trong bộ đệm của bên nhận", "Đếm số lần truyền lại"], "ans": 2 },
+        { "q": "Để đóng một kết nối TCP, quá trình thông thường gồm bao nhiêu bước (tin nhắn) trao đổi?", "options": ["2 bước", "3 bước", "4 bước (FIN, ACK, FIN, ACK)", "Không cần trao đổi"], "ans": 2 },
+        { "q": "TCP sử dụng cơ chế nào để nhận biết một gói tin đã bị mất?", "options": ["Sự kiện Timeout (Hết thời gian chờ)", "Nhận được 3 ACK trùng lặp (Duplicate ACKs)", "Cả 2 sự kiện trên", "Không có cơ chế nhận biết"], "ans": 2 },
+        { "q": "Khi TCP nhận được 3 ACK trùng lặp (Triple Duplicate ACKs), nó sẽ thực hiện cơ chế nào để giảm độ trễ?", "options": ["Chờ đến khi Timeout", "Slow Start", "Fast Retransmit (Truyền lại nhanh)", "Connection Teardown"], "ans": 2 },
+        { "q": "Số thứ tự (Sequence Number) trong TCP Header có ý nghĩa gì?", "options": ["Chỉ số thứ tự của phân đoạn (segment) được gửi", "Là số byte đầu tiên của phần dữ liệu trong phân đoạn so với luồng dữ liệu ban đầu", "Là số ACK mong đợi", "Là kích thước của gói tin"], "ans": 1 },
+        { "q": "TCP là một giao thức truyền Full-duplex. Điều này có nghĩa là gì?", "options": ["Dữ liệu chỉ truyền một chiều tại một thời điểm", "Dữ liệu có thể truyền đồng thời theo cả hai chiều giữa bên gửi và bên nhận trên cùng một kết nối", "Chỉ một bên được quyền gửi, bên kia nhận", "Bên gửi phải chờ ACK trước khi gửi gói tiếp theo"], "ans": 1 },
+        { "q": "Giao thức UDP cung cấp dịch vụ gì?", "options": ["Bảo mật", "Truyền dữ liệu không tin cậy, không kết nối (Connectionless, Unreliable)", "Đảm bảo tính toàn vẹn và thứ tự dữ liệu", "Kiểm soát lưu lượng mạng"], "ans": 1 },
+        { "q": "Cổng (Port) 0 - 1023 được gọi là gì?", "options": ["Dynamic Ports (Cổng động)", "Registered Ports (Cổng đăng ký)", "Well-known Ports (Cổng hệ thống phổ biến)", "Private Ports (Cổng riêng tư)"], "ans": 2 },
+        { "q": "Trong bộ giao thức TCP/IP, nếu phía nhận thấy bộ đệm (Receive Window) đã bằng 0, nó sẽ làm gì?", "options": ["Đóng kết nối", "Trả về một TCP Segment với trường Window Size = 0", "Xóa toàn bộ bộ đệm", "Gửi tín hiệu RST"], "ans": 1 },
+        { "q": "Kỹ thuật 'Pipelining' (đường ống) trong các giao thức vận chuyển (như Go-Back-N, Selective Repeat) có ưu điểm gì?", "options": ["Bảo mật cao hơn", "Cho phép gửi nhiều gói tin mà không cần chờ ACK cho từng gói, giúp tận dụng tối đa băng thông", "Dễ dàng khôi phục lỗi hơn Stop-and-Wait", "Giảm kích thước header"], "ans": 1 },
+        { "q": "Tham số MSS (Maximum Segment Size) trong TCP thể hiện điều gì?", "options": ["Kích thước tối đa của toàn bộ gói tin IP", "Kích thước tối đa của TCP Header", "Lượng dữ liệu ứng dụng (payload) tối đa có thể được đóng gói trong một TCP Segment", "Băng thông tối đa của đường truyền"], "ans": 2 },
+        { "q": "Trong thuật toán TCP Reno, khi sự kiện Timeout xảy ra, ngưỡng ssthresh (Slow Start Threshold) sẽ được điều chỉnh như thế nào?", "options": ["ssthresh = 1 MSS", "ssthresh không đổi", "ssthresh = cwnd / 2", "ssthresh = cwnd * 2"], "ans": 2 },
+        { "q": "Cơ chế 'SYN Cookies' được tạo ra nhằm mục đích gì?", "options": ["Kiểm soát luồng", "Chống lại cuộc tấn công từ chối dịch vụ SYN Flood Attack", "Mã hóa dữ liệu ứng dụng", "Định tuyến qua NAT"], "ans": 1 },
+        { "q": "Sự khác biệt chính giữa Giao thức Go-Back-N (GBN) và Selective Repeat (SR) là gì?", "options": ["GBN chỉ gửi 1 gói tin mỗi lần", "Khi có lỗi, GBN truyền lại toàn bộ gói tin từ điểm lỗi, còn SR chỉ truyền lại gói tin bị lỗi", "SR không sử dụng ACK", "GBN phức tạp hơn SR"], "ans": 1 },
+        { "q": "Để xác định khoảng thời gian Timeout (TimeoutInterval), TCP tính toán dựa trên yếu tố nào?", "options": ["Thời gian Round Trip Time (RTT) ước tính (EstimatedRTT) và Độ lệch RTT (DevRTT)", "Kích thước của Window Size", "Băng thông đường truyền vật lý", "Số lượng thiết bị trong mạng"], "ans": 0 },
+        { "q": "Socket của TCP được nhận diện bởi bộ 4 thông số (4-tuple) nào?", "options": ["Địa chỉ MAC nguồn, MAC đích, Port nguồn, Port đích", "Địa chỉ IP nguồn, IP đích, Port nguồn, Port đích", "IP nguồn, MAC đích, Port nguồn, Port đích", "Chỉ IP nguồn và IP đích"], "ans": 1 }
+    ],
+
+    "Chương 4: Tầng Mạng - Mặt phẳng dữ liệu (Data Plane)": [
+        {
+            "q": "Thiết bị Router hoạt động chủ yếu ở tầng nào của mô hình OSI?",
+            "options": [
+                "Tầng 1 (Physical)",
+                "Tầng 2 (Data Link)",
+                "Tầng 3 (Network)",
+                "Tầng 4 (Transport)"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Chức năng cốt lõi của mặt phẳng dữ liệu (Data Plane) trong Router là gì?",
+            "options": [
+                "Chạy các giải thuật định tuyến tìm đường",
+                "Tính toán và xây dựng bảng định tuyến (Routing Table)",
+                "Chuyển tiếp gói tin từ cổng vào (input) sang cổng ra (output) phù hợp (Forwarding)",
+                "Quản lý giám sát trạng thái thiết bị"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Trong Router, thành phần đóng vai trò kết nối vật lý các cổng đầu vào với các cổng đầu ra gọi là gì?",
+            "options": [
+                "Routing Processor (Bộ xử lý định tuyến)",
+                "Switching Fabric (Ma trận chuyển mạch)",
+                "Input Port Buffer",
+                "Output Port Buffer"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Ba kiến trúc Switching Fabric phổ biến nhất trong các thiết bị Router là gì?",
+            "options": [
+                "Memory, Bus, Interconnection Network (Crossbar)",
+                "Hub, Switch, Bridge",
+                "TCP, UDP, IP",
+                "FDM, TDM, CDMA"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Độ dài của địa chỉ IPv4 là bao nhiêu bit?",
+            "options": [
+                "16 bit",
+                "32 bit (4 bytes)",
+                "64 bit",
+                "128 bit"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Độ dài của địa chỉ IPv6 là bao nhiêu bit?",
+            "options": [
+                "32 bit",
+                "48 bit",
+                "64 bit",
+                "128 bit (16 bytes)"
+            ],
+            "ans": 3
+        },
+        {
+            "q": "Địa chỉ IPv6 sử dụng hệ cơ số nào để biểu diễn dưới dạng văn bản?",
+            "options": [
+                "Nhị phân (Binary)",
+                "Bát phân (Octal)",
+                "Thập phân (Decimal)",
+                "Thập lục phân (Hexadecimal)"
+            ],
+            "ans": 3
+        },
+        {
+            "q": "Sự cải tiến về cấu trúc Header giữa IPv6 so với IPv4 là gì?",
+            "options": [
+                "IPv6 loại bỏ trường Checksum, Fragmentation và Options ở header chính để tăng tốc độ định tuyến",
+                "IPv6 có kích thước Header lớn và phức tạp hơn rất nhiều",
+                "IPv6 giữ nguyên toàn bộ các trường của IPv4 và thêm trường mới",
+                "IPv6 không cần trường địa chỉ nguồn"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Số lượng các trường dữ liệu cố định trong Header của IPv6 so với IPv4 là:",
+            "options": [
+                "Nhiều hơn",
+                "Bằng nhau",
+                "Ít hơn (chỉ còn 8 trường cố định để router xử lý nhanh hơn)",
+                "Biến thiên liên tục"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Địa chỉ IP nào sau đây thuộc lớp địa chỉ C (mặc định)?",
+            "options": [
+                "10.1.1.1",
+                "172.16.0.1",
+                "192.168.1.1",
+                "225.1.1.1"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Subnet Mask mặc định của lớp địa chỉ IP Lớp A là:",
+            "options": [
+                "255.0.0.0 (/8)",
+                "255.255.0.0 (/16)",
+                "255.255.255.0 (/24)",
+                "0.0.0.0"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Với một dải mạng có ký hiệu 10.0.0.0/8, số lượng bit dành cho phần Host là:",
+            "options": [
+                "8 bit",
+                "16 bit",
+                "24 bit (32 - 8 = 24)",
+                "32 bit"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Một mạng lớp C mượn 2 bit của phần Host để chia subnet. Subnet Mask mới là:",
+            "options": [
+                "255.255.255.128",
+                "255.255.255.192 (/26)",
+                "255.255.255.224",
+                "255.255.255.240"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Một mạng lớp C mượn 5 bit của phần Host để chia subnet. Subnet Mask mới là:",
+            "options": [
+                "255.255.255.224",
+                "255.255.255.240",
+                "255.255.255.248 (/29)",
+                "255.255.255.252"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Một mạng lớp B cần chia thành 9 mạng con khả dụng, cần mượn tối thiểu 4 bit. Subnet Mask tương ứng là:",
+            "options": [
+                "255.255.224.0",
+                "255.255.240.0 (/20)",
+                "255.255.248.0",
+                "255.255.252.0"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Địa chỉ nào sau đây là địa chỉ Broadcast của dải mạng 192.168.25.128/28?",
+            "options": [
+                "192.168.25.255",
+                "192.168.25.141",
+                "192.168.25.143",
+                "192.168.25.159"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Địa chỉ host 172.16.25.14/30 thuộc mạng con (Network ID) nào?",
+            "options": [
+                "172.16.25.0",
+                "172.16.25.4",
+                "172.16.25.8",
+                "172.16.25.12"
+            ],
+            "ans": 3
+        },
+        {
+            "q": "Số lượng host sử dụng được tối đa trên một mạng con có Subnet Mask 255.255.255.252 (/30) là:",
+            "options": [
+                "2 host (2^2 - 2 = 2)",
+                "4 host",
+                "6 host",
+                "14 host"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Cho địa chỉ IP 110.23.120.14 với Subnet Mask 255.255.240.0. Địa chỉ mạng (Network Address) của subnet này là:",
+            "options": [
+                "110.23.112.0",
+                "110.23.120.0",
+                "110.23.0.0",
+                "110.0.0.0"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Địa chỉ nào sau đây là địa chỉ Loopback (tự kiểm tra giao tiếp nội bộ) trong IPv4?",
+            "options": [
+                "192.168.1.1",
+                "10.0.0.1",
+                "127.0.0.1",
+                "255.255.255.255"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Địa chỉ IP nào sau đây là một địa chỉ Multicast (Lớp D: 224.0.0.0 - 239.255.255.255)?",
+            "options": [
+                "192.168.1.1",
+                "224.0.0.1",
+                "255.255.255.255",
+                "127.0.0.1"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Địa chỉ IPv4 nào sau đây KHÔNG hợp lệ về mặt cú pháp?",
+            "options": [
+                "192.168.1.100",
+                "200.100.50.25",
+                "127.0.0.1",
+                "256.0.0.1 (octect vượt quá 255)"
+            ],
+            "ans": 3
+        },
+        {
+            "q": "Giao thức DHCP sử dụng tiến trình 4 bước gồm các thông điệp tuần tự nào để cấp phát địa chỉ IP cho máy khách?",
+            "options": [
+                "DORA (Discover, Offer, Request, ACK)",
+                "SYN, ACK, FIN, RST",
+                "GET, POST, PUT, DELETE",
+                "Ping, Echo, Reply, Close"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Giao thức DHCP có mục đích chính là gì?",
+            "options": [
+                "Phân giải tên miền thành địa chỉ IP",
+                "Định tuyến các gói tin qua mạng Internet",
+                "Tự động cấp phát cấu hình IP và thông số mạng cho các host",
+                "Kiểm tra lỗi đường truyền mạng"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Phát biểu nào sau đây là ĐÚNG về kỹ thuật NAT (Network Address Translation)?",
+            "options": [
+                "Chỉ dùng riêng cho giao thức IPv6",
+                "Cho phép nhiều thiết bị trong mạng cục bộ (IP private) dùng chung một IP public để truy cập Internet",
+                "Là giao thức hoạt động tại tầng Liên kết dữ liệu (Data Link)",
+                "Không làm thay đổi bất kỳ trường nào trong IP header"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Trong kiến trúc mạng định nghĩa bằng phần mềm (SDN), mặt phẳng điều khiển (Control Plane) nằm ở đâu?",
+            "options": [
+                "Tích hợp cứng trên từng cổng của switch",
+                "Được tách rời và quản lý bởi một bộ điều khiển Controller tập trung bằng phần mềm",
+                "Cài đặt trực tiếp trên trình duyệt của máy người dùng",
+                "Nằm hoàn toàn trong Switching Fabric"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Khi Router bị nghẽn (đầy bộ đệm hàng đợi output port), điều gì sẽ xảy ra với các gói tin mới đến?",
+            "options": [
+                "Gói tin bị trễ hoặc bị hủy bỏ/rớt gói (Packet loss)",
+                "Gói tin tự động đổi sang đường khác mà không cần router xử lý",
+                "Gói tin được tự động nén dung lượng",
+                "Tốc độ đường truyền tự động tăng lên để đáp ứng"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Nguyên tắc 'Longest Prefix Matching' (Khớp tiền tố dài nhất) trong Router dùng để làm gì?",
+            "options": [
+                "Tìm kiếm tên miền có độ dài lớn nhất",
+                "Lựa chọn cổng ra cho gói tin dựa trên địa chỉ mạng khớp chi tiết (nhiều bit mask nhất) trong bảng định tuyến",
+                "Tính toán trường kiểm tra lỗi Checksum",
+                "Chia nhỏ gói tin khi gặp MTU nhỏ"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Khi một gói tin IP có kích thước lớn hơn MTU của đường truyền kế tiếp, Router sẽ thực hiện xử lý gì?",
+            "options": [
+                "Hủy gói tin ngay lập tức",
+                "Thực hiện phân mảnh (Fragmentation) thành các gói tin nhỏ hơn",
+                "Nén dữ liệu lại",
+                "Gửi trả lại máy gửi ban đầu"
+            ],
+            "ans": 1
+        },
+        {
+            "q": "Khi một gói tin IPv4 bị phân mảnh (Fragmentation), thông số nào trong header chỉ thị rằng đây là mảnh cuối cùng?",
+            "options": [
+                "Fragment Offset = 0",
+                "MF = 1 (More Fragments = 1)",
+                "MF = 0 (More Fragments = 0)",
+                "TTL = 0"
+            ],
+            "ans": 2
+        },
+        {
+            "q": "Trong header gói tin IP, trường Time to Live (TTL) có tác dụng gì?",
+            "options": [
+                "Ngăn ngừa gói tin bị lặp vòng vô tận trên mạng (giảm 1 sau mỗi router, hủy khi bằng 0)",
+                "Đo lường thời gian đáp ứng của dịch vụ mạng",
+                "Mã hóa bảo vệ nội dung gói tin",
+                "Đếm số thứ tự gói tin được gửi đi"
+            ],
+            "ans": 0
+        },
+        {
+            "q": "Giao thức ICMP thường được đóng gói trực tiếp bên trong đơn vị dữ liệu nào?",
+            "options": [
+                "Ethernet Frame",
+                "TCP Segment",
+                "UDP Datagram",
+                "IP Datagram"
+            ],
+            "ans": 3
+        }
+    ],
+    
+
+    "Chương 5: Tầng Mạng - Mặt phẳng điều khiển (Control Plane)": [
+        { "q": "Mặt phẳng điều khiển (Control Plane) trong mạng máy tính có chức năng gì?", "options": ["Đóng gói dữ liệu", "Tính toán đường đi cho các gói tin và xây dựng bảng định tuyến", "Kết nối cáp vật lý", "Kiểm soát truy cập Web"], "ans": 1 },
+        { "q": "Thuật toán định tuyến Distance Vector (Vector Khoảng Cách) hoạt động theo nguyên lý nào?", "options": ["Mỗi router chia sẻ toàn bộ sơ đồ mạng cho tất cả các router khác", "Mỗi router chia sẻ bảng định tuyến (ước lượng chi phí đường đi) của mình cho các router HÀNG XÓM trực tiếp", "Định tuyến ngẫu nhiên", "Sử dụng bộ điều khiển trung tâm (SDN Controller)"], "ans": 1 },
+        { "q": "Thuật toán Link State (Trạng thái liên kết) sử dụng giải thuật nào để tính toán đường đi ngắn nhất?", "options": ["Thuật toán Dijkstra", "Thuật toán Bellman-Ford", "Thuật toán Kruskal", "Thuật toán Prim"], "ans": 0 },
+        { "q": "Giao thức OSPF (Open Shortest Path First) là một giao thức định tuyến dựa trên thuật toán nào?", "options": ["Distance Vector", "Link State", "Path Vector", "BGP"], "ans": 1 },
+        { "q": "Giao thức định tuyến RIP (Routing Information Protocol) giới hạn số hop (bước nhảy) tối đa là bao nhiêu?", "options": ["10", "15", "16", "255"], "ans": 1 },
+        { "q": "Giao thức nào được xem là giao thức định tuyến liên miền (Inter-AS Routing) tiêu chuẩn của Internet toàn cầu?", "options": ["OSPF", "RIP", "EIGRP", "BGP (Border Gateway Protocol)"], "ans": 3 },
+        { "q": "Hệ thống Tự trị (Autonomous System - AS) là gì?", "options": ["Một máy chủ duy nhất", "Một cụm các Router được quản lý dưới cùng một tên miền và chính sách định tuyến", "Một phần mềm định tuyến", "Một mạng LAN cục bộ"], "ans": 1 },
+        { "q": "Vấn đề 'Count-to-Infinity' (Đếm đến vô cùng) là nhược điểm nổi tiếng của thuật toán định tuyến nào?", "options": ["Link State", "Distance Vector", "Path Vector", "Static Routing"], "ans": 1 },
+        { "q": "Giao thức ICMP (Internet Control Message Protocol) được sử dụng để làm gì?", "options": ["Truyền tải email", "Thiết lập kết nối TCP", "Truyền tải các thông điệp báo lỗi mạng và kiểm tra kết nối (Ping, Tracert)", "Phân giải địa chỉ MAC"], "ans": 2 },
+        { "q": "Lệnh 'Ping' hoạt động dựa trên các thông điệp ICMP nào?", "options": ["Port Unreachable", "Time Exceeded", "Echo Request và Echo Reply", "Destination Unreachable"], "ans": 2 },
+        { "q": "Trong kiến trúc mạng SDN (Software-Defined Networking), Controller và các Switch giao tiếp với nhau bằng giao thức nào phổ biến nhất?", "options": ["BGP", "OpenFlow", "OSPF", "SNMP"], "ans": 1 },
+        { "q": "Ưu điểm chính của SDN (Software-Defined Networking) là gì?", "options": ["Tăng cường bảo mật bằng mật khẩu", "Tính tập trung, lập trình được, giúp quản lý mạng linh hoạt từ một Control Plane duy nhất", "Tốc độ xử lý của CPU router tăng lên", "Sử dụng cáp quang tốc độ cao hơn"], "ans": 1 },
+        { "q": "Trường hợp nào Router sẽ gửi thông điệp ICMP 'Time Exceeded' (Vượt quá thời gian)?", "options": ["Khi không tìm thấy MAC", "Khi trường TTL (Time to Live) của gói tin IP giảm xuống 0", "Khi bộ đệm của Router bị đầy", "Khi cổng TCP bị đóng"], "ans": 1 },
+        { "q": "Trong BGP, các Router thuộc CÙNG một Autonomous System (AS) giao tiếp với nhau qua giao thức nào?", "options": ["eBGP", "iBGP", "OSPF", "RIP"], "ans": 1 },
+        { "q": "Tại sao các mạng cấp doanh nghiệp lớn lại ưa chuộng OSPF hơn RIP?", "options": ["OSPF dễ cấu hình hơn", "OSPF hội tụ nhanh hơn, sử dụng băng thông hiệu quả hơn và không bị giới hạn 15 hops", "OSPF không cần địa chỉ IP", "OSPF là giao thức mã nguồn mở"], "ans": 1 },
+        { "q": "Thông điệp 'Destination Network Unreachable' (Mạng đích không thể đến) được Router sinh ra khi nào?", "options": ["Khi Router không tìm thấy đường đi nào trong Bảng định tuyến khớp với IP đích", "Khi gói tin có TTL = 0", "Khi gói tin bị lỗi Checksum", "Khi Host đích tắt máy"], "ans": 0 },
+        { "q": "Chức năng của thuật toán Bellman-Ford được ứng dụng trong giao thức nào?", "options": ["OSPF", "IS-IS", "RIP", "HTTP"], "ans": 2 },
+        { "q": "Trong SDN, giao diện kết nối giữa SDN Controller và các ứng dụng mạng (Network Applications) ở phía trên được gọi là gì?", "options": ["Southbound API", "Northbound API", "Eastbound API", "Westbound API"], "ans": 1 },
+        { "q": "Giao diện kết nối giữa SDN Controller và các thiết bị phần cứng (Switch/Router) ở phía dưới được gọi là gì?", "options": ["Southbound API (ví dụ: OpenFlow)", "Northbound API", "Eastbound API", "Westbound API"], "ans": 0 },
+        { "q": "Thuật toán Link State yêu cầu mỗi router phải thực hiện hành động nào?", "options": ["Chỉ gửi thông tin cho router trung tâm", "Gửi bảng định tuyến cho hàng xóm", "Quảng bá (Broadcast/Flood) trạng thái liên kết cục bộ của nó cho TẤT CẢ các router trong mạng", "Không làm gì cả"], "ans": 2 },
+        { "q": "Trong BGP, khái niệm 'Path Vector' (Vector đường đi) có nghĩa là gì?", "options": ["Lưu trữ hướng đi của từ trường", "Thông điệp BGP chứa toàn bộ danh sách các AS (AS-PATH) mà gói tin phải đi qua để tránh vòng lặp", "Đếm số hop", "Đo độ trễ của đường truyền"], "ans": 1 },
+        { "q": "Một gói tin traceroute thường thao tác trên trường nào của IP Header để xác định đường đi?", "options": ["Trường Protocol", "Trường Header Length", "Trường TTL (Time to Live) - tăng dần TTL từ 1", "Trường Type of Service"], "ans": 2 },
+        { "q": "Nếu tốc độ gói tin đi vào Router lớn hơn tốc độ xử lý và chuyển tiếp, điều gì sẽ xảy ra?", "options": ["Gói tin bị phân mảnh", "Gói tin được xếp vào hàng đợi (Queue), nếu hàng đợi đầy gói tin sẽ bị rớt (Packet loss)", "Router sẽ tăng tốc tự động", "Gói tin được gửi lại máy nguồn lập tức"], "ans": 1 },
+        { "q": "Để chuyển một thông điệp Broadcast đến toàn bộ máy trong mạng cục bộ IPv4, địa chỉ IP đích phải là:", "options": ["0.0.0.0", "127.0.0.1", "255.255.255.255", "192.168.1.1"], "ans": 2 },
+        { "q": "Khái niệm 'Control Plane' truyền thống hoạt động theo mô hình nào?", "options": ["Centralized (Tập trung ở một máy chủ)", "Decentralized / Distributed (Phân tán ở từng Router tự tính toán đường đi)", "Lai ghép", "Cloud-based"], "ans": 1 }
+    ],
+
+    "Chương 6: Tầng Liên kết dữ liệu và mạng LAN": [
+        { "q": "Tầng Liên kết dữ liệu (Data Link Layer) chịu trách nhiệm về việc gì?", "options": ["Định tuyến toàn cầu trên Internet", "Chuyển giao các Datagram từ một node (nút) sang node kế tiếp qua một liên kết đơn (link)", "Giao tiếp giữa các tiến trình phần mềm", "Mã hóa dữ liệu video"], "ans": 1 },
+        { "q": "Đơn vị dữ liệu tại Tầng Liên kết dữ liệu được gọi là gì?", "options": ["Packet", "Segment", "Frame (Khung)", "Bit"], "ans": 2 },
+        { "q": "Địa chỉ MAC (Media Access Control) có độ dài bao nhiêu bit?", "options": ["32 bits", "48 bits", "64 bits", "128 bits"], "ans": 1 },
+        { "q": "Địa chỉ MAC được phân bổ ở đâu?", "options": ["Gán cứng vào phần cứng (NIC - Card mạng) bởi nhà sản xuất", "Do Server cấp phát động", "Tùy chọn cấu hình bởi người dùng hệ điều hành", "Thay đổi liên tục khi khởi động lại máy"], "ans": 0 },
+        { "q": "Giao thức ARP (Address Resolution Protocol) dùng để làm gì?", "options": ["Phân giải tên miền thành địa chỉ IP", "Phân giải địa chỉ MAC thành địa chỉ IP", "Phân giải địa chỉ IPv4 thành địa chỉ MAC tương ứng trong cùng một mạng LAN", "Phát hiện lỗi khung dữ liệu"], "ans": 2 },
+        { "q": "Giao thức nào là phổ biến nhất cho mạng LAN có dây (Wired LAN) hiện nay?", "options": ["Token Ring", "Ethernet (IEEE 802.3)", "ATM", "Frame Relay"], "ans": 1 },
+        { "q": "Phương pháp Đa truy cập (Multiple Access) được sử dụng trong Ethernet truyền thống là gì?", "options": ["CSMA/CA", "Token Passing", "TDMA", "CSMA/CD (Carrier Sense Multiple Access with Collision Detection)"], "ans": 3 },
+        { "q": "CSMA/CD xử lý việc truyền dữ liệu như thế nào khi phát hiện có đụng độ (Collision)?", "options": ["Bỏ qua và tiếp tục truyền", "Ngừng truyền lập tức, gửi tín hiệu jam, chờ một khoảng thời gian ngẫu nhiên (Backoff) rồi thử lại", "Gửi yêu cầu khởi động lại mạng", "Gửi gói tin theo đường khác"], "ans": 1 },
+        { "q": "Hub khác biệt với Switch (Bộ chuyển mạch) ở điểm nào?", "options": ["Hub thông minh hơn Switch", "Hub hoạt động ở Lớp 1 (Vật lý), khi nhận tín hiệu ở 1 cổng sẽ phát lại ra TẤT CẢ các cổng khác (Shared medium)", "Hub có bảng địa chỉ MAC", "Hub chỉ dùng cho cáp quang"], "ans": 1 },
+        { "q": "Thiết bị Switch hoạt động ở tầng nào của mô hình OSI?", "options": ["Lớp 1 (Vật lý)", "Lớp 2 (Data Link)", "Lớp 3 (Network)", "Lớp 4 (Transport)"], "ans": 1 },
+        { "q": "Khi Switch nhận được một Frame có địa chỉ MAC đích không nằm trong MAC Table, nó sẽ xử lý thế nào?", "options": ["Xóa Frame đó đi", "Flood (Chuyển tiếp) Frame đó ra tất cả các cổng, TRỪ cổng nhận vào", "Gửi lại máy nguồn báo lỗi", "Broadcast một yêu cầu DNS"], "ans": 1 },
+        { "q": "Bảng địa chỉ MAC (MAC Table / Switch Table) được Switch xây dựng như thế nào?", "options": ["Do người quản trị nhập thủ công", "Switch 'tự học' (Self-learning) bằng cách ghi nhận địa chỉ MAC NGUỒN của các Frame đi vào mỗi cổng", "Tải từ Internet về", "Được cấp phát từ DHCP"], "ans": 1 },
+        { "q": "Giao thức nào được sử dụng ở tầng Liên kết dữ liệu để phát hiện lỗi bit trong Frame?", "options": ["Checksum", "CRC (Cyclic Redundancy Check)", "Parity Bit", "Tất cả các phương án trên"], "ans": 3 },
+        { "q": "Đặc điểm của một Collision Domain (Vùng đụng độ) là gì?", "options": ["Khu vực mạng mà nếu hai máy cùng truyền dữ liệu thì sẽ xảy ra đụng độ", "Khu vực mạng chỉ sử dụng sóng vô tuyến", "Khu vực mạng quản lý bởi một Router", "Một phòng máy chủ"], "ans": 0 },
+        { "q": "Thiết bị nào giúp phân tách (isolate) các Collision Domain hiệu quả?", "options": ["Hub", "Repeater", "Switch / Bridge", "Cáp UTP"], "ans": 2 },
+        { "q": "Thiết bị nào giúp phân tách các Broadcast Domain (Vùng quảng bá)?", "options": ["Switch", "Hub", "Router", "Access Point"], "ans": 2 },
+        { "q": "VLAN (Virtual LAN) giải quyết bài toán gì?", "options": ["Tăng tốc độ truy cập Internet", "Phân chia một Switch vật lý thành nhiều miền Broadcast ảo riêng biệt để tăng bảo mật và dễ quản lý", "Kết nối các mạng WAN", "Thay thế hoàn toàn chức năng của Router"], "ans": 1 },
+        { "q": "Để các Switch kết nối với nhau và truyền tải nhiều VLAN trên cùng một đường dây, ta sử dụng cổng gì?", "options": ["Cổng Access", "Cổng Trunk (Trunking port chuẩn 802.1Q)", "Cổng Console", "Cổng Management"], "ans": 1 },
+        { "q": "Gói tin ARP Request được truyền đi theo phương thức nào?", "options": ["Unicast", "Multicast", "Broadcast", "Anycast"], "ans": 2 },
+        { "q": "Kích thước tối đa của phần dữ liệu (Payload) trong một khung Ethernet tiêu chuẩn (Standard Ethernet Frame) là bao nhiêu byte?", "options": ["64 byte", "512 byte", "1500 byte (MTU)", "9000 byte"], "ans": 2 },
+        { "q": "Kích thước tối thiểu của một khung Ethernet tiêu chuẩn là bao nhiêu byte?", "options": ["20 bytes", "46 bytes", "64 bytes", "1500 bytes"], "ans": 2 },
+        { "q": "Địa chỉ MAC Broadcast có giá trị Hexadecimal là gì?", "options": ["00:00:00:00:00:00", "AA:BB:CC:DD:EE:FF", "FF:FF:FF:FF:FF:FF", "11:11:11:11:11:11"], "ans": 2 },
+        { "q": "Khi một máy di chuyển từ mạng LAN A sang mạng LAN B, địa chỉ nào của máy đó sẽ thay đổi?", "options": ["Địa chỉ MAC", "Địa chỉ IP", "Cả IP và MAC đều đổi", "Không địa chỉ nào thay đổi"], "ans": 1 },
+        { "q": "Mã Preamble trong khung Ethernet (8 bytes đầu tiên) dùng để làm gì?", "options": ["Đồng bộ hóa đồng hồ giữa bên nhận và bên gửi", "Xác định địa chỉ người nhận", "Kiểm tra lỗi", "Chỉ định chuẩn Ethernet (10BaseT hay 100BaseT)"], "ans": 0 },
+        { "q": "Mạng Ethernet sử dụng sơ đồ đấu nối (topology) vật lý phổ biến nhất hiện nay là gì?", "options": ["Ring Topology", "Bus Topology với cáp đồng trục", "Star Topology với trung tâm là Switch", "Mesh Topology"], "ans": 2 }
+    ],
+
+    "Chương 7: Mạng không dây và di động (Wireless)": [
+        { "q": "Tiêu chuẩn IEEE nào định nghĩa công nghệ mạng LAN không dây (Wi-Fi)?", "options": ["IEEE 802.3", "IEEE 802.11", "IEEE 802.15", "IEEE 802.16"], "ans": 1 },
+        { "q": "Cơ chế Đa truy cập nào được sử dụng trong mạng không dây 802.11 (Wi-Fi)?", "options": ["CSMA/CD", "CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)", "Token Ring", "TDMA"], "ans": 1 },
+        { "q": "Vấn đề 'Hidden Terminal' (Trạm ẩn) trong mạng không dây có nghĩa là gì?", "options": ["Trạm bị tắt nguồn nên ẩn", "Hai trạm A và C ở xa nhau không 'nghe' được tín hiệu của nhau, nhưng cùng truyền dữ liệu đến trạm B ở giữa gây đụng độ tại B", "Trạm kết nối nhưng không phát IP", "Sóng bị tường cản"], "ans": 1 },
+        { "q": "Để giải quyết vấn đề Hidden Terminal, chuẩn 802.11 hỗ trợ giao thức tùy chọn nào?", "options": ["ARP / RARP", "RTS / CTS (Request to Send / Clear to Send)", "SYN / ACK", "PING / PONG"], "ans": 1 },
+        { "q": "Trong cơ sở hạ tầng mạng 802.11, BSS (Basic Service Set) là gì?", "options": ["Một trạm gốc không dây (Access Point) và các máy trạm (wireless hosts) kết nối với nó", "Một mạng di động 4G", "Giao thức bảo mật Wi-Fi", "Hệ thống ăng-ten"], "ans": 0 },
+        { "q": "Tín hiệu không dây suy giảm sức mạnh khi truyền qua không gian (do khoảng cách hoặc chướng ngại vật). Hiện tượng này gọi là gì?", "options": ["Multipath Fading", "Path Loss (Suy hao đường truyền / Attenuation)", "Interference (Nhiễu)", "Crosstalk"], "ans": 1 },
+        { "q": "Hiện tượng Fading đa đường (Multipath Fading) xảy ra do đâu?", "options": ["Do các thiết bị điện từ khác gây nhiễu", "Sóng vô tuyến phản xạ vào các vật thể, tạo ra nhiều phiên bản tín hiệu đến máy nhận ở các thời điểm hơi khác nhau, làm mờ tín hiệu", "Do sấm sét", "Do khoảng cách quá xa"], "ans": 1 },
+        { "q": "Quá trình một máy trạm (client) di chuyển từ phạm vi của Access Point này sang Access Point khác mà vẫn giữ kết nối mạng gọi là gì?", "options": ["Handoff (Chuyển giao)", "Routing (Định tuyến)", "Switching (Chuyển mạch)", "Beaconing"], "ans": 0 },
+        { "q": "Khung quản lý nào được Access Point phát định kỳ để quảng bá SSID và MAC address của nó?", "options": ["Probe Request Frame", "RTS Frame", "Beacon Frame", "ACK Frame"], "ans": 2 },
+        { "q": "Mạng Bluetooth hoạt động dựa trên tiêu chuẩn IEEE nào?", "options": ["802.11", "802.15 (WPAN)", "802.16 (WiMAX)", "802.3"], "ans": 1 },
+        { "q": "Bluetooth sử dụng kỹ thuật truyền dẫn nào để giảm nhiễu?", "options": ["FDM", "TDM", "FHSS (Frequency-Hopping Spread Spectrum)", "DSSS"], "ans": 2 },
+        { "q": "Trong cấu trúc mạng Bluetooth, một 'Piconet' bao gồm tối đa bao nhiêu thiết bị hoạt động (Active devices)?", "options": ["1 Master và 7 Slaves", "1 Master và 255 Slaves", "Tất cả đều là Master", "Không giới hạn"], "ans": 0 },
+        { "q": "Mạng di động Cellular (Ví dụ: 3G, 4G, 5G) chia không gian địa lý thành các vùng nhỏ gọi là gì?", "options": ["Cells (Tế bào)", "BSS", "Subnets", "VLANs"], "ans": 0 },
+        { "q": "Thiết bị đóng vai trò trung tâm liên lạc cho các thiết bị di động trong một Cell gọi là gì?", "options": ["Router", "Base Station (Trạm gốc)", "Switch", "Hub"], "ans": 1 },
+        { "q": "Trong mạng 4G LTE, khái niệm eNodeB tương đương với thiết bị nào?", "options": ["Máy chủ Web", "Trạm gốc (Base Station)", "Điện thoại di động", "Trung tâm chuyển mạch"], "ans": 1 },
+        { "q": "Khác biệt giữa cơ chế quét chủ động (Active Scanning) và quét bị động (Passive Scanning) của máy trạm Wi-Fi là gì?", "options": ["Passive: Phát sóng yêu cầu; Active: Chỉ nghe", "Passive: Lắng nghe Beacon frames; Active: Gửi Probe Request frame để tìm AP", "Active nhanh hơn Passive 100 lần", "Không có sự khác biệt"], "ans": 1 },
+        { "q": "Địa chỉ MAC trong khung 802.11 khác biệt với khung Ethernet 802.3 ở điểm nào?", "options": ["Chỉ có 2 địa chỉ MAC", "Có tới 4 địa chỉ MAC (Ví dụ: MAC nguồn, MAC đích, MAC của AP, MAC của Router kết nối AP)", "Không sử dụng địa chỉ MAC", "Địa chỉ MAC dài 64-bit"], "ans": 1 },
+        { "q": "Trong mạng Wi-Fi, việc gửi ACK (Acknowledgment) sau khi nhận khung dữ liệu có bắt buộc không?", "options": ["Không bắt buộc, giống như Ethernet", "Có, CSMA/CA yêu cầu ACK ở tầng MAC để xác nhận khung đã đến đích không bị lỗi", "Chỉ bắt buộc đối với mạng công cộng", "Phụ thuộc vào hệ điều hành"], "ans": 1 },
+        { "q": "Chế độ Ad-hoc trong mạng không dây nghĩa là gì?", "options": ["Các thiết bị phải kết nối qua Access Point", "Các thiết bị không dây liên kết TRỰC TIẾP với nhau không cần Access Point hạ tầng", "Kết nối qua cáp mạng", "Mạng chỉ dùng để in ấn"], "ans": 1 },
+        { "q": "Vì sao giao thức CSMA/CD không được áp dụng cho mạng không dây?", "options": ["Vì CSMA/CD quá chậm", "Vì mạng không dây không thể 'vừa phát vừa nghe' để phát hiện đụng độ một cách tin cậy do cường độ tín hiệu suy giảm nhanh", "Vì mạng không dây không có đụng độ", "Vì sóng radio quá mạnh"], "ans": 1 },
+        { "q": "Mạng WiMAX thuộc chuẩn IEEE nào?", "options": ["802.11", "802.15", "802.16", "802.20"], "ans": 2 },
+        { "q": "Đặc trưng lớn nhất của mạng cảm biến không dây (Wireless Sensor Networks - Zigbee) là gì?", "options": ["Băng thông cực kỳ cao", "Phủ sóng xuyên lục địa", "Tiêu thụ năng lượng rất thấp, dùng cho các thiết bị IoT", "Thay thế cáp quang"], "ans": 2 },
+        { "q": "Khoảng cách Inter-Frame Space (IFS) trong 802.11 (ví dụ DIFS, SIFS) dùng để làm gì?", "options": ["Tạo khoảng dừng ngắn trước khi truyền để phân cấp độ ưu tiên (ví dụ ACK dùng SIFS ngắn, Dữ liệu dùng DIFS dài)", "Xóa bộ nhớ đệm", "Mã hóa dữ liệu", "Phân mảnh gói tin"], "ans": 0 },
+        { "q": "Khi một máy tính xách tay (Laptop) kết nối vào mạng Wi-Fi tại quán cà phê, mạng đó thuộc mô hình nào?", "options": ["Infrastructure mode (Chế độ hạ tầng)", "Ad-hoc mode", "Personal Area Network", "Wired LAN"], "ans": 0 },
+        { "q": "Dịch vụ Mobility (Tính di động) ở mức Network-layer (Mobile IP) giải quyết bài toán gì?", "options": ["Giữ nguyên địa chỉ IP của thiết bị khi di chuyển qua các subnet khác nhau để kết nối TCP không bị đứt", "Tăng tốc độ mạng", "Bảo mật mạng Wi-Fi", "Lọc nội dung web"], "ans": 0 }
+    ],
+
+    "Chương 8: Tầng Vật lý và An ninh mạng (Physical & Security)": [
+        { "q": "Ba mục tiêu cơ bản của an ninh mạng (Network Security) là gì?", "options": ["Tốc độ, Khả năng mở rộng, Tính di động", "Tính bảo mật (Confidentiality), Tính toàn vẹn (Integrity), Tính xác thực (Authentication)", "Chống đụng độ, Định tuyến, Đóng gói", "Gửi nhanh, Băng thông cao, Miễn phí"], "ans": 1 },
+        { "q": "Mã hóa đối xứng (Symmetric-key cryptography) có đặc điểm gì?", "options": ["Người gửi và người nhận dùng 2 khóa khác nhau", "Sử dụng một khóa chung (Shared Key) duy nhất để vừa mã hóa vừa giải mã", "Chỉ cần khóa để giải mã, không cần mã hóa", "Không cần khóa bảo mật"], "ans": 1 },
+        { "q": "Mã hóa bất đối xứng (Public-key cryptography) sử dụng cặp khóa nào?", "options": ["2 khóa bí mật", "Khóa công khai (Public Key) và Khóa bí mật (Private Key)", "2 khóa công khai", "Khóa ngẫu nhiên sinh ra mỗi giây"], "ans": 1 },
+        { "q": "Trong mã hóa Public-key (vd: RSA), nếu Alice muốn gửi tin nhắn bảo mật cho Bob, Alice dùng khóa nào để MÃ HÓA?", "options": ["Private Key của Alice", "Public Key của Alice", "Private Key của Bob", "Public Key của Bob"], "ans": 3 },
+        { "q": "Chữ ký điện tử (Digital Signature) dùng để chứng minh điều gì?", "options": ["Làm đẹp email", "Đảm bảo tính toàn vẹn của dữ liệu và xác thực danh tính người gửi (Chống chối bỏ)", "Mã hóa toàn bộ tài liệu để không ai đọc được", "Chặn virus độc hại"], "ans": 1 },
+        { "q": "Để tạo ra chữ ký điện tử, người gửi (Alice) sẽ MÃ HÓA bản tóm tắt thông điệp (Hash) bằng khóa nào?", "options": ["Public Key của Bob", "Private Key của Bob", "Public Key của Alice", "Private Key của Alice"], "ans": 3 },
+        { "q": "Hàm băm (Hash function) như MD5 hay SHA-1 tạo ra một giá trị có độ dài như thế nào?", "options": ["Độ dài cố định không đổi (Fixed-length) bất kể dữ liệu đầu vào dài bao nhiêu", "Độ dài bằng đúng dữ liệu gốc", "Độ dài lớn hơn dữ liệu gốc", "Thay đổi tùy theo phần mềm mã hóa"], "ans": 0 },
+        { "q": "Giao thức SSL (Secure Socket Layer) / TLS hoạt động ở tầng nào để cung cấp bảo mật cho các ứng dụng web?", "options": ["Tầng Mạng (Network)", "Nằm giữa Tầng Ứng dụng (Application) và Tầng Giao vận (Transport)", "Tầng Vật lý (Physical)", "Tầng Liên kết dữ liệu (Data Link)"], "ans": 1 },
+        { "q": "Chứng thư số (Digital Certificate) được cấp bởi ai?", "options": ["Người dùng tự cấp", "Tổ chức Chứng thực uy tín (Certification Authority - CA)", "Nhà cung cấp dịch vụ Internet (ISP)", "Bộ Công an"], "ans": 1 },
+        { "q": "IPsec (IP Security) cung cấp bảo mật ở tầng nào của mô hình TCP/IP?", "options": ["Tầng Ứng dụng", "Tầng Giao vận", "Tầng Mạng (Network Layer)", "Tầng Liên kết dữ liệu"], "ans": 2 },
+        { "q": "Tường lửa (Firewall) lọc gói tin (Packet Filtering) chủ yếu dựa vào thông tin nào?", "options": ["Nội dung file đính kèm email", "Địa chỉ IP nguồn/đích, Cổng TCP/UDP nguồn/đích và loại Giao thức", "Hành vi người dùng", "Chữ ký số"], "ans": 1 },
+        { "q": "Mạng riêng ảo (VPN - Virtual Private Network) sử dụng kỹ thuật gì để truyền dữ liệu an toàn qua mạng Internet công cộng?", "options": ["Phát sóng Radio", "Tunneling (Đường hầm) kết hợp mã hóa dữ liệu (IPsec)", "Chặn mọi kết nối từ bên ngoài", "Cấp IP nội bộ ngẫu nhiên"], "ans": 1 },
+        { "q": "Chuẩn bảo mật nào sau đây là an toàn nhất hiện nay cho mạng Wi-Fi (802.11)?", "options": ["WEP", "WPA", "WPA2 / WPA3", "Mở không cần mật khẩu"], "ans": 2 },
+        { "q": "Loại phần mềm độc hại (Malware) nào lây nhiễm bằng cách lừa người dùng tải và cài đặt nó dưới vỏ bọc một ứng dụng hợp pháp?", "options": ["Virus", "Worm (Sâu)", "Trojan Horse", "Spyware"], "ans": 2 },
+        { "q": "Loại phần mềm độc hại nào có khả năng tự động lây lan qua mạng mà không cần sự tương tác trực tiếp của con người?", "options": ["Trojan", "Worm (Sâu máy tính)", "Keylogger", "Adware"], "ans": 1 },
+        { "q": "Tấn công Từ chối dịch vụ (DoS - Denial of Service) có mục đích gì?", "options": ["Đánh cắp mật khẩu", "Mã hóa tống tiền dữ liệu", "Làm quá tải máy chủ hoặc tài nguyên mạng, khiến người dùng hợp pháp không thể truy cập", "Phát tán quảng cáo"], "ans": 2 },
+        { "q": "Một trong những kỹ thuật chống lại tấn công SYN Flood là gì?", "options": ["Tắt luôn máy chủ", "SYN Cookies", "Mã hóa AES 256-bit", "Dùng cáp quang thay cáp đồng"], "ans": 1 },
+        { "q": "Thuật ngữ 'Phishing' (Tấn công giả mạo) nghĩa là gì?", "options": ["Câu cá qua mạng", "Lập một trang web hoặc email giả mạo các tổ chức uy tín (như ngân hàng) để đánh cắp thông tin đăng nhập của người dùng", "Vô hiệu hóa Firewall", "Cài đặt lén lút phần mềm theo dõi"], "ans": 1 },
+        { "q": "Ở Tầng Vật lý, loại cáp nào cung cấp tốc độ cao, khả năng chống nhiễu tuyệt đối và suy hao thấp nhất khi truyền qua khoảng cách xa?", "options": ["Cáp xoắn đôi UTP", "Cáp xoắn đôi STP", "Cáp đồng trục", "Cáp quang (Fiber-optic)"], "ans": 3 },
+        { "q": "Tín hiệu bị yếu đi khi truyền qua dây dẫn dài được gọi là hiện tượng gì?", "options": ["Crosstalk (Nhiễu xuyên âm)", "Attenuation (Suy hao)", "Latency (Độ trễ)", "Distortion (Biến dạng)"], "ans": 1 },
+        { "q": "Cáp mạng CAT 5e / CAT 6 (Cáp xoắn đôi không bọc giáp) thường được bấm bằng đầu nối loại nào?", "options": ["RJ-11", "BNC", "RJ-45", "LC / SC"], "ans": 2 },
+        { "q": "Cáp quang Multi-mode khác Single-mode ở điểm nào?", "options": ["Lõi lớn hơn, cho phép nhiều tia sáng truyền qua cùng lúc, thường dùng cho khoảng cách ngắn hơn Single-mode", "Sử dụng tín hiệu điện thay vì ánh sáng", "Truyền xa hơn hàng trăm kilomet so với Single-mode", "Làm bằng đồng thay vì thủy tinh"], "ans": 0 },
+        { "q": "Giao thức SSL/TLS cung cấp 3 tính năng bảo mật nào?", "options": ["Định tuyến, chuyển mạch, phát sóng", "Mã hóa dữ liệu, xác thực máy chủ, toàn vẹn dữ liệu", "Tường lửa, phát hiện xâm nhập, diệt virus", "Ping, Traceroute, ARP"], "ans": 1 },
+        { "q": "Độ trễ truyền tải dữ liệu ở Lớp vật lý bị giới hạn bởi yếu tố vật lý nào?", "options": ["Tốc độ CPU máy tính", "Tốc độ ánh sáng trong môi trường truyền dẫn (Tốc độ lan truyền - Propagation Speed)", "Kích thước của màn hình hiển thị", "Nhiệt độ phòng máy"], "ans": 1 },
+        { "q": "Trong mô hình OSI, Tầng vật lý (Physical Layer) liên quan đến khía cạnh nào?", "options": ["Giải mã tệp tin PDF", "Quy định tín hiệu điện, quang, chốt cắm cơ học và truyền luồng bit thô qua môi trường", "Kiểm soát lỗi bằng checksum", "Định tuyến IP"], "ans": 1 }
+    ]
+};
+    // DOM Elements
+    const chapterSelect = document.getElementById('chapter-select');
+    const autoCheckToggle = document.getElementById('auto-check-toggle');
+    const questionsList = document.getElementById('questions-list');
+    const chapterBanner = document.getElementById('chapter-banner');
+    const chapterTitle = document.getElementById('chapter-title');
+    const chapterTotalQ = document.getElementById('chapter-total-q');
+    const chapterDoneQ = document.getElementById('chapter-done-q');
+    const chapterCorrectQ = document.getElementById('chapter-correct-q');
+    const chapterWrongQ = document.getElementById('chapter-wrong-q');
+    const chapterAccuracy = document.getElementById('chapter-accuracy');
+    const progressFill = document.getElementById('progress-fill');
+    const btnResetChapter = document.getElementById('btn-reset-chapter');
+    const btnShowAllAnswers = document.getElementById('btn-show-all-answers');
+    const badgeTotalQuestions = document.getElementById('badge-total-questions');
+
+    // State
+    let activeQuestions = [];
+    let userAnswers = {}; // { qIndex: { selected: number, checked: boolean, isCorrect: boolean } }
+
+    // Tính tổng số câu toàn bộ ngân hàng
+    let grandTotalQuestions = 0;
+    for (const ch in quizData) {
+        grandTotalQuestions += quizData[ch].length;
+    }
+    badgeTotalQuestions.textContent = `${grandTotalQuestions} Câu hỏi toàn bộ`;
+
+    // Nạp các chương vào Select box, hiển thị kèm TỔNG SỐ CÂU HỎI của mỗi chương
+    for (const chapter in quizData) {
+        const count = quizData[chapter].length;
+        const option = document.createElement('option');
+        option.value = chapter;
+        // Hiển thị rõ tổng câu hỏi của mỗi phần theo yêu cầu người dùng
+        option.textContent = `${chapter} (${count} câu)`;
+        chapterSelect.appendChild(option);
+    }
+
+    // Sự kiện khi người dùng chọn chương
+    chapterSelect.addEventListener('change', function() {
+        const selectedValue = this.value;
+        if (!selectedValue) {
+            chapterBanner.style.display = "none";
+            questionsList.innerHTML = `
+                <div class="empty-placeholder">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>Vui lòng chọn một chương ở menu phía trên để bắt đầu luyện tập câu hỏi trắc nghiệm!</p>
+                </div>
+            `;
+            activeQuestions = [];
+            userAnswers = {};
+            return;
+        }
+
+        if (selectedValue === "ALL") {
+            // Gộp tất cả các câu hỏi
+            activeQuestions = [];
+            for (const ch in quizData) {
+                quizData[ch].forEach((q, idx) => {
+                    activeQuestions.push({ ...q, sectionName: ch });
+                });
+            }
+            chapterTitle.textContent = "🌟 Toàn Bộ Ngân Hàng Câu Hỏi (Tổng hợp tất cả 8 chương)";
+        } else {
+            activeQuestions = quizData[selectedValue].map(q => ({ ...q, sectionName: selectedValue }));
+            chapterTitle.textContent = selectedValue;
+        }
+
+        userAnswers = {};
+        renderQuestions();
+        updateStats();
+        chapterBanner.style.display = "block";
+    });
+
+    // Render danh sách câu hỏi
+    function renderQuestions() {
+        questionsList.innerHTML = "";
+
+        activeQuestions.forEach((qObj, index) => {
+            const block = document.createElement('div');
+            block.className = 'question-block';
+            block.id = `qblock-${index}`;
+
+            // Meta info (số thứ tự + badge chương nếu xem ALL)
+            const metaDiv = document.createElement('div');
+            metaDiv.className = 'question-meta';
+
+            const numSpan = document.createElement('span');
+            numSpan.className = 'question-num';
+            numSpan.textContent = `Câu ${index + 1} / ${activeQuestions.length}`;
+            metaDiv.appendChild(numSpan);
+
+            if (chapterSelect.value === "ALL" && qObj.sectionName) {
+                const secBadge = document.createElement('span');
+                secBadge.className = 'badge badge-neutral';
+                secBadge.style.fontSize = '11px';
+                secBadge.style.padding = '3px 8px';
+                secBadge.textContent = qObj.sectionName.split(':')[0];
+                metaDiv.appendChild(secBadge);
+            }
+
+            block.appendChild(metaDiv);
+
+            // Nội dung câu hỏi
+            const title = document.createElement('div');
+            title.className = 'question-title';
+            title.textContent = qObj.q;
+            block.appendChild(title);
+
+            // Danh sách đáp án
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options';
+
+            qObj.options.forEach((opt, optIndex) => {
+                const label = document.createElement('label');
+                label.className = 'option-label';
+                label.id = `label-${index}-${optIndex}`;
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `question-${index}`;
+                radio.value = optIndex;
+
+                // Khi click vào lựa chọn
+                radio.addEventListener('change', () => {
+                    handleOptionSelect(index, optIndex);
+                });
+
+                const textSpan = document.createElement('span');
+                textSpan.className = 'option-text';
+                textSpan.innerHTML = `<strong>${String.fromCharCode(65 + optIndex)}.</strong> ${escapeHtml(opt)}`;
+
+                label.appendChild(radio);
+                label.appendChild(textSpan);
+                optionsDiv.appendChild(label);
+            });
+
+            block.appendChild(optionsDiv);
+
+            // Nút bấm tương tác
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'question-actions';
+
+            const checkBtn = document.createElement('button');
+            checkBtn.type = 'button';
+            checkBtn.className = 'btn-check';
+            checkBtn.textContent = 'Kiểm tra đáp án';
+            checkBtn.onclick = () => checkAnswer(index);
+            actionsDiv.appendChild(checkBtn);
+
+            const showBtn = document.createElement('button');
+            showBtn.type = 'button';
+            showBtn.className = 'btn-show';
+            showBtn.textContent = '👁️ Hiện đáp án';
+            showBtn.onclick = () => revealAnswer(index);
+            actionsDiv.appendChild(showBtn);
+
+            const resetBtn = document.createElement('button');
+            resetBtn.type = 'button';
+            resetBtn.className = 'btn-reset-q';
+            resetBtn.textContent = 'Làm lại câu này';
+            resetBtn.onclick = () => resetQuestion(index);
+            actionsDiv.appendChild(resetBtn);
+
+            block.appendChild(actionsDiv);
+
+            // Khung thông báo kết quả tức thì
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'result-box';
+            resultDiv.id = `result-${index}`;
+            block.appendChild(resultDiv);
+
+            questionsList.appendChild(block);
+        });
+    }
+
+    // Xử lý khi người dùng chọn 1 option
+    function handleOptionSelect(qIndex, selectedOptIndex) {
+        if (!userAnswers[qIndex]) {
+            userAnswers[qIndex] = {};
+        }
+        userAnswers[qIndex].selected = selectedOptIndex;
+
+        // Nếu đang bật chế độ tự động hiện kết quả ngay lập tức
+        if (autoCheckToggle.checked) {
+            checkAnswer(qIndex);
+        }
+    }
+
+    // Kiểm tra và hiển thị đáp án cho TỪNG CÂU HỎI
+    function checkAnswer(qIndex) {
+        const qObj = activeQuestions[qIndex];
+        const correctAns = qObj.ans;
+        const selectedRadio = document.querySelector(`input[name="question-${qIndex}"]:checked`);
+        const resultDiv = document.getElementById(`result-${qIndex}`);
+        const block = document.getElementById(`qblock-${qIndex}`);
+
+        if (!selectedRadio) {
+            resultDiv.className = 'result-box warning show';
+            resultDiv.innerHTML = `⚠️ <strong>Vui lòng chọn một đáp án</strong> (A, B, C hoặc D) trước khi kiểm tra!`;
+            return;
+        }
+
+        const selectedVal = parseInt(selectedRadio.value);
+        const isCorrect = (selectedVal === correctAns);
+
+        userAnswers[qIndex] = {
+            selected: selectedVal,
+            checked: true,
+            isCorrect: isCorrect
+        };
+
+        // Reset highlights cũ của câu này
+        for (let i = 0; i < qObj.options.length; i++) {
+            const lbl = document.getElementById(`label-${qIndex}-${i}`);
+            lbl.classList.remove('ans-correct', 'ans-wrong');
+            const oldTag = lbl.querySelector('.tag-badge');
+            if (oldTag) oldTag.remove();
+        }
+
+        // Highlight đáp án đúng bằng màu xanh lá
+        const correctLabel = document.getElementById(`label-${qIndex}-${correctAns}`);
+        correctLabel.classList.add('ans-correct');
+        const correctTag = document.createElement('span');
+        correctTag.className = 'tag-badge tag-correct';
+        correctTag.textContent = '✔ Đáp án chính xác';
+        correctLabel.appendChild(correctTag);
+
+        const correctLetter = String.fromCharCode(65 + correctAns);
+        const correctText = qObj.options[correctAns];
+
+        if (isCorrect) {
+            block.className = 'question-block state-correct';
+            resultDiv.className = 'result-box correct show';
+            resultDiv.innerHTML = `
+                🎉 <strong>Chính xác!</strong> Đáp án đúng là <strong>${correctLetter}:</strong> ${escapeHtml(correctText)}
+            `;
+        } else {
+            // Highlight đáp án sai người dùng đã chọn bằng màu đỏ
+            const selectedLabel = document.getElementById(`label-${qIndex}-${selectedVal}`);
+            selectedLabel.classList.add('ans-wrong');
+            const chosenTag = document.createElement('span');
+            chosenTag.className = 'tag-badge tag-chosen';
+            chosenTag.textContent = '✖ Lựa chọn của bạn';
+            selectedLabel.appendChild(chosenTag);
+
+            block.className = 'question-block state-wrong';
+            resultDiv.className = 'result-box incorrect show';
+            resultDiv.innerHTML = `
+                ❌ <strong>Chưa chính xác!</strong> Bạn chọn <strong>${String.fromCharCode(65 + selectedVal)}</strong>. Đáp án đúng phải là <strong>${correctLetter}:</strong> ${escapeHtml(correctText)}
+            `;
+        }
+
+        updateStats();
+    }
+
+    // Hiển thị trực tiếp đáp án đúng mà không cần chọn
+    function revealAnswer(qIndex) {
+        const qObj = activeQuestions[qIndex];
+        const correctAns = qObj.ans;
+        const resultDiv = document.getElementById(`result-${qIndex}`);
+        const block = document.getElementById(`qblock-${qIndex}`);
+
+        // Reset highlights
+        for (let i = 0; i < qObj.options.length; i++) {
+            const lbl = document.getElementById(`label-${qIndex}-${i}`);
+            lbl.classList.remove('ans-correct', 'ans-wrong');
+            const oldTag = lbl.querySelector('.tag-badge');
+            if (oldTag) oldTag.remove();
+        }
+
+        const correctLabel = document.getElementById(`label-${qIndex}-${correctAns}`);
+        correctLabel.classList.add('ans-correct');
+        const correctTag = document.createElement('span');
+        correctTag.className = 'tag-badge tag-correct';
+        correctTag.textContent = '✔ Đáp án chính xác';
+        correctLabel.appendChild(correctTag);
+
+        block.className = 'question-block state-correct';
+        resultDiv.className = 'result-box correct show';
+        resultDiv.innerHTML = `
+            💡 <strong>Đáp án đúng là:</strong> <strong>${String.fromCharCode(65 + correctAns)}:</strong> ${escapeHtml(qObj.options[correctAns])}
+        `;
+    }
+
+    // Reset làm lại 1 câu hỏi
+    function resetQuestion(qIndex) {
+        const qObj = activeQuestions[qIndex];
+        const block = document.getElementById(`qblock-${qIndex}`);
+        const resultDiv = document.getElementById(`result-${qIndex}`);
+
+        block.className = 'question-block';
+        resultDiv.className = 'result-box';
+        resultDiv.innerHTML = '';
+
+        const radios = document.querySelectorAll(`input[name="question-${qIndex}"]`);
+        radios.forEach(r => r.checked = false);
+
+        for (let i = 0; i < qObj.options.length; i++) {
+            const lbl = document.getElementById(`label-${qIndex}-${i}`);
+            lbl.classList.remove('ans-correct', 'ans-wrong');
+            const oldTag = lbl.querySelector('.tag-badge');
+            if (oldTag) oldTag.remove();
+        }
+
+        delete userAnswers[qIndex];
+        updateStats();
+    }
+
+    // Cập nhật thanh tiến độ và số liệu thống kê
+    function updateStats() {
+        const total = activeQuestions.length;
+        chapterTotalQ.textContent = total;
+
+        let doneCount = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        for (const idx in userAnswers) {
+            if (userAnswers[idx].checked) {
+                doneCount++;
+                if (userAnswers[idx].isCorrect) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            }
+        }
+
+        chapterDoneQ.textContent = doneCount;
+        chapterCorrectQ.textContent = correctCount;
+        chapterWrongQ.textContent = wrongCount;
+
+        const accuracy = doneCount > 0 ? Math.round((correctCount / doneCount) * 100) : 0;
+        chapterAccuracy.textContent = `${accuracy}%`;
+
+        const progressPercent = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+        progressFill.style.width = `${progressPercent}%`;
+    }
+
+    // Nút Hiện tất cả đáp án của chương
+    btnShowAllAnswers.addEventListener('click', function() {
+        if (activeQuestions.length === 0) return;
+        if (confirm("Bạn có muốn hiển thị đáp án đúng của tất cả các câu hỏi trong phần này không?")) {
+            activeQuestions.forEach((_, idx) => revealAnswer(idx));
+        }
+    });
+
+    // Nút Làm lại cả chương
+    btnResetChapter.addEventListener('click', function() {
+        if (activeQuestions.length === 0) return;
+        if (confirm("Bạn có chắc chắn muốn làm lại từ đầu phần này không?")) {
+            userAnswers = {};
+            renderQuestions();
+            updateStats();
+            window.scrollTo({ top: chapterBanner.offsetTop - 20, behavior: 'smooth' });
+        }
+    });
+
+    // Helper escape html
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+</script>
+
+</body>
+</html>
