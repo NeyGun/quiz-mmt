@@ -174,6 +174,14 @@ function updateSessionStatus() {
             title.textContent = qObj.q;
             block.appendChild(title);
 
+            if (qObj.image) {
+                const image = document.createElement('img');
+                image.className = 'question-image';
+                image.src = qObj.image;
+                image.alt = 'Hình minh họa cho câu hỏi';
+                block.appendChild(image);
+            }
+
             // Danh sách đáp án
             const optionsDiv = document.createElement('div');
             optionsDiv.className = 'options';
@@ -320,6 +328,7 @@ function updateSessionStatus() {
             resultDiv.className = 'result-box correct show';
             resultDiv.innerHTML = `
                 🎉 <strong>Chính xác!</strong> Đáp án đúng là <strong>${correctLetter}:</strong> ${escapeHtml(correctText)}
+                ${qObj.explain ? `<div class="explanation"><strong>Giải thích:</strong> ${escapeHtml(qObj.explain)}</div>` : ''}
             `;
         } else {
             // Highlight đáp án sai người dùng đã chọn bằng màu đỏ
@@ -334,6 +343,7 @@ function updateSessionStatus() {
             resultDiv.className = 'result-box incorrect show';
             resultDiv.innerHTML = `
                 ❌ <strong>Chưa chính xác!</strong> Bạn chọn <strong>${String.fromCharCode(65 + selectedVal)}</strong>. Đáp án đúng phải là <strong>${correctLetter}:</strong> ${escapeHtml(correctText)}
+                ${qObj.explain ? `<div class="explanation"><strong>Giải thích:</strong> ${escapeHtml(qObj.explain)}</div>` : ''}
             `;
         }
 
@@ -367,6 +377,7 @@ function updateSessionStatus() {
         resultDiv.className = 'result-box correct show';
         resultDiv.innerHTML = `
             💡 <strong>Đáp án đúng là:</strong> <strong>${String.fromCharCode(65 + correctAns)}:</strong> ${escapeHtml(qObj.options[correctAns])}
+            ${qObj.explain ? `<div class="explanation"><strong>Giải thích:</strong> ${escapeHtml(qObj.explain)}</div>` : ''}
         `;
         userAnswers[qIndex] = { ...userAnswers[qIndex], revealed: true };
         if (shouldPersist) persistSession();

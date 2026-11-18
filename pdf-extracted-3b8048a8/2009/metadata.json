@@ -1,0 +1,26 @@
+{
+  "source": "2009.pdf",
+  "pages": 8,
+  "pages_with_text": 8,
+  "pages_ocr": 0,
+  "images": [
+    {
+      "name": "image1.jpeg",
+      "page": 1
+    },
+    {
+      "name": "image2.jpeg",
+      "page": 2
+    },
+    {
+      "name": "image3.jpeg",
+      "page": 6
+    },
+    {
+      "name": "image4.jpeg",
+      "page": 6
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}

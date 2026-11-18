@@ -1,0 +1,34 @@
+{
+  "source": "08_DeOn3.pdf",
+  "pages": 13,
+  "pages_with_text": 12,
+  "pages_ocr": 0,
+  "images": [
+    {
+      "name": "image1.jpeg",
+      "page": 4
+    },
+    {
+      "name": "image2.png",
+      "page": 11
+    },
+    {
+      "name": "image3.png",
+      "page": 11
+    },
+    {
+      "name": "image4.png",
+      "page": 12
+    },
+    {
+      "name": "image5.png",
+      "page": 12
+    },
+    {
+      "name": "image6.png",
+      "page": 12
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}

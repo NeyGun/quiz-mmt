@@ -1,0 +1,78 @@
+{
+  "source": "Made_2121_HK2_2122_Câu-hỏi-thi_Đáp-án.pdf",
+  "pages": 8,
+  "pages_with_text": 8,
+  "pages_ocr": 0,
+  "images": [
+    {
+      "name": "image1.png",
+      "page": 1
+    },
+    {
+      "name": "image2.png",
+      "page": 1
+    },
+    {
+      "name": "image3.png",
+      "page": 1
+    },
+    {
+      "name": "image4.png",
+      "page": 2
+    },
+    {
+      "name": "image5.png",
+      "page": 3
+    },
+    {
+      "name": "image6.png",
+      "page": 3
+    },
+    {
+      "name": "image7.png",
+      "page": 4
+    },
+    {
+      "name": "image8.png",
+      "page": 4
+    },
+    {
+      "name": "image9.png",
+      "page": 5
+    },
+    {
+      "name": "image10.png",
+      "page": 5
+    },
+    {
+      "name": "image11.png",
+      "page": 6
+    },
+    {
+      "name": "image12.jpeg",
+      "page": 6
+    },
+    {
+      "name": "image13.png",
+      "page": 7
+    },
+    {
+      "name": "image14.png",
+      "page": 7
+    },
+    {
+      "name": "image15.png",
+      "page": 7
+    },
+    {
+      "name": "image16.png",
+      "page": 8
+    },
+    {
+      "name": "image17.png",
+      "page": 8
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}

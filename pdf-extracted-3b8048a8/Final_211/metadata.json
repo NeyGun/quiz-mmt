@@ -1,0 +1,270 @@
+{
+  "source": "Final 211.pdf",
+  "pages": 14,
+  "pages_with_text": 14,
+  "pages_ocr": 14,
+  "images": [
+    {
+      "name": "image1.jpeg",
+      "page": 1
+    },
+    {
+      "name": "image2.jpeg",
+      "page": 1
+    },
+    {
+      "name": "image3.jpeg",
+      "page": 1
+    },
+    {
+      "name": "image4.jpeg",
+      "page": 1
+    },
+    {
+      "name": "image5.jpeg",
+      "page": 1
+    },
+    {
+      "name": "image6.jpeg",
+      "page": 2
+    },
+    {
+      "name": "image7.jpeg",
+      "page": 2
+    },
+    {
+      "name": "image8.jpeg",
+      "page": 2
+    },
+    {
+      "name": "image9.jpeg",
+      "page": 2
+    },
+    {
+      "name": "image10.jpeg",
+      "page": 3
+    },
+    {
+      "name": "image11.jpeg",
+      "page": 3
+    },
+    {
+      "name": "image12.jpeg",
+      "page": 3
+    },
+    {
+      "name": "image13.jpeg",
+      "page": 3
+    },
+    {
+      "name": "image14.jpeg",
+      "page": 4
+    },
+    {
+      "name": "image15.jpeg",
+      "page": 4
+    },
+    {
+      "name": "image16.jpeg",
+      "page": 4
+    },
+    {
+      "name": "image17.jpeg",
+      "page": 4
+    },
+    {
+      "name": "image18.jpeg",
+      "page": 4
+    },
+    {
+      "name": "image19.jpeg",
+      "page": 5
+    },
+    {
+      "name": "image20.jpeg",
+      "page": 5
+    },
+    {
+      "name": "image21.jpeg",
+      "page": 5
+    },
+    {
+      "name": "image22.jpeg",
+      "page": 5
+    },
+    {
+      "name": "image23.jpeg",
+      "page": 5
+    },
+    {
+      "name": "image24.jpeg",
+      "page": 6
+    },
+    {
+      "name": "image25.jpeg",
+      "page": 6
+    },
+    {
+      "name": "image26.jpeg",
+      "page": 6
+    },
+    {
+      "name": "image27.jpeg",
+      "page": 6
+    },
+    {
+      "name": "image28.jpeg",
+      "page": 7
+    },
+    {
+      "name": "image29.jpeg",
+      "page": 7
+    },
+    {
+      "name": "image30.jpeg",
+      "page": 7
+    },
+    {
+      "name": "image31.jpeg",
+      "page": 7
+    },
+    {
+      "name": "image32.jpeg",
+      "page": 7
+    },
+    {
+      "name": "image33.jpeg",
+      "page": 8
+    },
+    {
+      "name": "image34.jpeg",
+      "page": 8
+    },
+    {
+      "name": "image35.jpeg",
+      "page": 8
+    },
+    {
+      "name": "image36.jpeg",
+      "page": 8
+    },
+    {
+      "name": "image37.jpeg",
+      "page": 8
+    },
+    {
+      "name": "image38.jpeg",
+      "page": 9
+    },
+    {
+      "name": "image39.jpeg",
+      "page": 9
+    },
+    {
+      "name": "image40.jpeg",
+      "page": 9
+    },
+    {
+      "name": "image41.jpeg",
+      "page": 9
+    },
+    {
+      "name": "image42.jpeg",
+      "page": 9
+    },
+    {
+      "name": "image43.jpeg",
+      "page": 10
+    },
+    {
+      "name": "image44.jpeg",
+      "page": 10
+    },
+    {
+      "name": "image45.jpeg",
+      "page": 10
+    },
+    {
+      "name": "image46.jpeg",
+      "page": 10
+    },
+    {
+      "name": "image47.jpeg",
+      "page": 10
+    },
+    {
+      "name": "image48.jpeg",
+      "page": 11
+    },
+    {
+      "name": "image49.jpeg",
+      "page": 11
+    },
+    {
+      "name": "image50.jpeg",
+      "page": 11
+    },
+    {
+      "name": "image51.jpeg",
+      "page": 11
+    },
+    {
+      "name": "image52.jpeg",
+      "page": 12
+    },
+    {
+      "name": "image53.jpeg",
+      "page": 12
+    },
+    {
+      "name": "image54.jpeg",
+      "page": 12
+    },
+    {
+      "name": "image55.jpeg",
+      "page": 12
+    },
+    {
+      "name": "image56.jpeg",
+      "page": 12
+    },
+    {
+      "name": "image57.jpeg",
+      "page": 13
+    },
+    {
+      "name": "image58.jpeg",
+      "page": 13
+    },
+    {
+      "name": "image59.jpeg",
+      "page": 13
+    },
+    {
+      "name": "image60.jpeg",
+      "page": 13
+    },
+    {
+      "name": "image61.jpeg",
+      "page": 13
+    },
+    {
+      "name": "image62.jpeg",
+      "page": 14
+    },
+    {
+      "name": "image63.jpeg",
+      "page": 14
+    },
+    {
+      "name": "image64.jpeg",
+      "page": 14
+    },
+    {
+      "name": "image65.jpeg",
+      "page": 14
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}

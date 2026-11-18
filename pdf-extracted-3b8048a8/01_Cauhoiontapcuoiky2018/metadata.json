@@ -1,0 +1,22 @@
+{
+  "source": "01_Cauhoiontapcuoiky2018.pdf",
+  "pages": 20,
+  "pages_with_text": 20,
+  "pages_ocr": 0,
+  "images": [
+    {
+      "name": "image1.png",
+      "page": 13
+    },
+    {
+      "name": "image2.png",
+      "page": 15
+    },
+    {
+      "name": "image3.png",
+      "page": 20
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}

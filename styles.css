@@ -285,6 +285,14 @@
             line-height: 1.5;
         }
 
+        .question-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 16px;
+            border-radius: 6px;
+        }
+
         /* Options */
         .options {
             display: flex;
@@ -449,6 +457,13 @@
             background-color: var(--warning-light);
             border: 1px solid #ffe0b2;
             color: #b25e02;
+        }
+
+        .result-box .explanation {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid currentColor;
+            color: inherit;
         }
 
         @keyframes fadeIn {

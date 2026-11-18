@@ -1,0 +1,18 @@
+{
+  "source": "Made_2231_HK2_2223_Câu hỏi thi_Đáp án.pdf",
+  "pages": 8,
+  "pages_with_text": 8,
+  "pages_ocr": 0,
+  "images": [
+    {
+      "name": "image1.png",
+      "page": 1
+    },
+    {
+      "name": "image2.png",
+      "page": 2
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}

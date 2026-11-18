@@ -1,0 +1,34 @@
+{
+  "source": "191.pdf",
+  "pages": 10,
+  "pages_with_text": 10,
+  "pages_ocr": 0,
+  "images": [
+    {
+      "name": "image1.png",
+      "page": 3
+    },
+    {
+      "name": "image2.png",
+      "page": 3
+    },
+    {
+      "name": "image3.png",
+      "page": 5
+    },
+    {
+      "name": "image4.jpeg",
+      "page": 7
+    },
+    {
+      "name": "image5.png",
+      "page": 9
+    },
+    {
+      "name": "image6.jpeg",
+      "page": 10
+    }
+  ],
+  "ocr_available": true,
+  "note": "PDF vector graphics may not exist as standalone image objects; scanned pages are retained as page images."
+}
